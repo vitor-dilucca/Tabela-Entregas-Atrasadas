@@ -24,7 +24,6 @@
       <input type="checkbox" value="false" name="refreshCancel">
       <span class="slider round"></span>
     </label>
-
     <table id="table-entregas" class="table table-bordered">
 
       <thead class="thead-dark">
@@ -40,8 +39,6 @@
       </thead>
       
     </table>
-    <!-- ${objEntregasAtrasadas['0'].Cliente_c01_F0FFF0} -->
-    
   </div>
 </body>
 
@@ -76,48 +73,37 @@
       let marcadorContainer = document.querySelector('.marcador-container')
       let tableEntregas = document.querySelector('#table-entregas')
 
-      // $verde = substr('Cliente_c01_F0FFF0', -6);
-      //   $azul = substr('Horas_Atrasadas_c02_00FFFF', -6);
-
-      //   echo '
-      //   <tbody>
-      //     <tr>
-      //       <td style ="background-color:#' . $verde . '"> ' . $obj['Cliente_c01_F0FFF0'] . ' </td>
-      //       <td style ="background-color:#' . $verde . '">' . $obj['Romaneio_c01_F0FFF0'] . '</td>
-      //       <td style ="background-color:#' . $verde . '">' . $obj['Transportador_c01_F0FFF0'] . '</td>
-      //       <td style ="background-color:#' . $verde . '">' . $obj['Previsao_entrega_c01_F0FFF0'] . '</td>
-      //       <td style ="background-color:#' . $verde . '">' . $obj['Logistica_c01_F0FFF0'] . '</td>
-      //       <td style ="background-color:#' . $verde . '">' . $obj['Tentativas_entregas_c01_F0FFF0'] . '</td>
-      //       <td style ="background-color:#' . $azul . '">' . $obj['Horas_Atrasadas_c02_00FFFF'] . '</td>
-      //     </tr>
-      //   </tbody>
-      //   ';
       let verde = 'Cliente_c01_F0FFF0'.substring(12)
+      let azul = 'Horas_Atrasadas_c02_00FFFF'.substring(20)
+
       console.log(verde)
       
-      for(let i in obje
-      )
-      tableEntregas.innerHTML += `
-        <tbody>
-          <tr>
-            <td style ="background-color:#${verde}">${objEntregasAtrasadas}</td>
-            <td>Roma</td>
-            <td>nomedotranpso</td>
-            <td>data</td>
-            <td>logisictica sela</td>
-            <td>numero 2</td>
-            <td>horas</td>
-          </tr>
-        </tbody>
-      `
+      for (let i in objEntregasAtrasadas) {
+        let obj= objEntregasAtrasadas[i]
 
+        tableEntregas.innerHTML += `
+          <tbody>
+            <tr>
+              <td style ="background-color:#${verde}">${obj.Cliente_c01_F0FFF0}</td>
+              <td style ="background-color:#${verde}">${obj.Romaneio_c01_F0FFF0}</td>
+              <td style ="background-color:#${verde}">${obj.Transportador_c01_F0FFF0}</td>
+              <td style ="background-color:#${verde}">${obj.Previsao_entrega_c01_F0FFF0}</td>
+              <td style ="background-color:#${verde}">${obj.Logistica_c01_F0FFF0}</td>
+              <td style ="background-color:#${verde}">${obj.Tentativas_entregas_c01_F0FFF0}</td>
+              <td style ="background-color:#${azul}">${obj.Horas_Atrasadas_c02_00FFFF}</td>
+            </tr>
+          </tbody>
+        `
 
+      }//forin
 
-
-    } else if (ajax.readyState == 4 && ajax.status == 404) {
+    }//if200 & 4 
+    else if (ajax.readyState == 4 && ajax.status == 404) {
       console.log('erro')
     }
-  }
+
+  }//onreadystate
+
   ajax.send()
 </script>
 
