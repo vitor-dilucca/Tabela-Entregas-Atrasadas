@@ -13,98 +13,22 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <title>ENTREGAS ATRASADAS</title>
+  <title>ENTREGAS ATRASADASadasdas</title>
 </head>
 
 <body>
-  <h1>Entregas atrasadas</h1>
-  <div class="marcador-container">
+  <header>
+    <h1>Entregas atrasadas</h1>
+    <hr>
+  </header>
 
-    <label class="switch">
-      <input type="checkbox" value="false" name="refreshCancel">
-      <span class="slider round"></span>
-    </label>
-    <table id="table-entregas" class="table table-bordered">
-
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Cliente</th>
-          <th scope="col">Romaneio</th>
-          <th scope="col">Transportador</th>
-          <th scope="col">Previsão de Entrega</th>
-          <th scope="col">Logística</th>
-          <th scope="col">Tentativas de entrega</th>
-          <th scope="col">Horas atrasadas</th>
-        </tr>
-      </thead>
-      
-    </table>
+  <div class="entregas-container">
+    <?php include("entregas_container_conteudo.php"); ?>
   </div>
 </body>
 
-
 <script>
-  //Rotina que atualiza a pagina a cada tempo determinado:
-  /* function refreshPage() {
-    console.log('refreshing')
-    location.reload();
-  }
-  setInterval(refreshPage, 7000); */
 
-  //Rotina que adiciona um evento ao botão para que quando este checado faça algo:
-  /* const toggleSwitch = document.querySelector("input[name='refreshCancel']");
-  toggleSwitch.addEventListener("change", function() {
-    if (toggleSwitch.checked) {
-      console.log("oi mundo");
-    }
-  }); */
-
-  let ajax = new XMLHttpRequest()
-  ajax.open("GET", "entregas_atrasadas.json")
-  console.log(ajax)
-
-  ajax.onreadystatechange = () => {
-    if (ajax.readyState == 4 && ajax.status == 200) {
-
-      let entregasAtrasadas = ajax.responseText
-      let objEntregasAtrasadas = JSON.parse(entregasAtrasadas)
-      console.log(objEntregasAtrasadas)
-
-      let marcadorContainer = document.querySelector('.marcador-container')
-      let tableEntregas = document.querySelector('#table-entregas')
-
-      let verde = 'Cliente_c01_F0FFF0'.substring(12)
-      let azul = 'Horas_Atrasadas_c02_00FFFF'.substring(20)
-
-      console.log(verde)
-      
-      for (let i in objEntregasAtrasadas) {
-        let obj= objEntregasAtrasadas[i]
-
-        tableEntregas.innerHTML += `
-          <tbody>
-            <tr>
-              <td style ="background-color:#${verde}">${obj.Cliente_c01_F0FFF0}</td>
-              <td style ="background-color:#${verde}">${obj.Romaneio_c01_F0FFF0}</td>
-              <td style ="background-color:#${verde}">${obj.Transportador_c01_F0FFF0}</td>
-              <td style ="background-color:#${verde}">${obj.Previsao_entrega_c01_F0FFF0}</td>
-              <td style ="background-color:#${verde}">${obj.Logistica_c01_F0FFF0}</td>
-              <td style ="background-color:#${verde}">${obj.Tentativas_entregas_c01_F0FFF0}</td>
-              <td style ="background-color:#${azul}">${obj.Horas_Atrasadas_c02_00FFFF}</td>
-            </tr>
-          </tbody>
-        `
-
-      }//forin
-
-    }//if200 & 4 
-    else if (ajax.readyState == 4 && ajax.status == 404) {
-      console.log('erro')
-    }
-
-  }//onreadystate
-
-  ajax.send()
 </script>
 
 </html>
