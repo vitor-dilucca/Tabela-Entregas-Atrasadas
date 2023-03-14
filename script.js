@@ -1,25 +1,9 @@
-function botao(){
-  //Rotina que adiciona um evento ao botão para que quando este checado faça algo:
-  const toggleSwitch = document.querySelector("input[name='refreshCancel']");
-  toggleSwitch.addEventListener("change", function() {
-    if (toggleSwitch.checked) {
-      console.log("oi mundo");
-    }
-  });
-}
-botao()
-
-function ajaxTeste(){
-  let ajax = new XMLHttpRequest()
-  ajax.open("GET", "testeAjax.php")
-  console.log(ajax)
-  
-}
+let intervalID = ''
 
 function atualizarEntregas(){
 
   let ajax = new XMLHttpRequest()
-  ajax.open("GET", "entregas_atrasadas.json")
+  ajax.open("GET", "entregas_atrasadas.json?t=" + new Date().getTime())
   // console.log(ajax)
   
   ajax.onreadystatechange = () => {
@@ -36,6 +20,19 @@ function atualizarEntregas(){
       let verde = 'Cliente_c01_F0FFF0'.substring(12)
       let azul = 'Horas_Atrasadas_c02_00FFFF'.substring(20)
   
+      tableEntregas.innerHTML += `
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Cliente</th>
+          <th scope="col">Romaneio</th>
+          <th scope="col">Transportador</th>
+          <th scope="col">Previsão de Entrega</th>
+          <th scope="col">Logística</th>
+          <th scope="col">Tentativas de entrega</th>
+          <th scope="col">Horas atrasadas</th>
+        </tr>
+      </thead>`
+
       for (let i in objEntregasAtrasadas) {
         let obj = objEntregasAtrasadas[i]
   
@@ -55,31 +52,6 @@ function atualizarEntregas(){
         
       } //forin
       
-    //Rotina que atualiza a pagina a cada tempo determinado:
-      /* function refreshPage() {
-        console.log('refreshing')
-        location.reload();
-      }
-      setInterval(refreshPage, 2000); */
-  
-      /* function requisitarPagina() {
-    
-        // let ajax = new XMLHttpRequest()
-    
-        ajax.open('GET', "table.php")
-        // console.log(ajax.readyState)
-    
-    
-        if (ajax.readyState == 4 && ajax.status == 200) {
-          console.log(ajax.readyState)
-          console.log('requisitarpagina function')
-          tableEntregas.innerHTML = ajax.responseText
-        }
-    
-        // ajax.send()
-      }
-      requisitarPagina() */
-      
     } //if200 & 4 
     else if (ajax.readyState == 4 && ajax.status == 404) {
       console.log('erro')
@@ -89,4 +61,24 @@ function atualizarEntregas(){
   
   ajax.send()
 }
-setInterval(atualizarEntregas, 5000);
+
+function iniciarAtualizacaoAuto(){
+  intervalID = setInterval(atualizarEntregas, 4000);
+  console.log('Atualizando dados')
+}
+
+function pararAtualizacaoAuto(){
+  clearInterval(intervalID)
+  console.log("Parada atualizaçao automatica")
+}
+
+iniciarAtualizacaoAuto();
+
+const toggleAtualizacaoAuto = document.querySelector('#toggle-atualizacao-auto')
+toggleAtualizacaoAuto.addEventListener('change', ()=>{
+  if (!(toggleAtualizacaoAuto.checked)){
+    pararAtualizacaoAuto();
+  }else{
+    iniciarAtualizacaoAuto()
+  }
+})
