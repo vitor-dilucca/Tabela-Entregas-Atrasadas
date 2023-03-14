@@ -22,13 +22,13 @@
     <hr>
   </header>
 
+  <button onclick="ajaxTeste()">teste</button>
+
   <div class="entregas-container">
     <?php include("entregas_container_conteudo.php"); ?>
   </div>
 </body>
 
-<script>
-
-</script>
+<script src="script.js"></script>
 
 </html>

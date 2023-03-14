@@ -22,11 +22,11 @@
 </div>
 
 <script src="script.js"></script>
-<script>
+<!-- <script>
   //Rotina que atualiza a pagina a cada tempo determinado:
     function refreshPage() {
       console.log('refreshing')
       location.reload();
     }
     setInterval(refreshPage, 2000);
-</script>
+</script> -->
