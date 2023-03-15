@@ -22,7 +22,19 @@
   </header>
 
   <div class="entregas-container">
-    <?php include("entregas_container_conteudo.php"); ?>
+    
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="toggle-atualizacao-auto">
+      <label class="form-check-label" for="toggle-atualizacao-auto">Atualizar dados automaticamente</label>
+    </div>
+
+    <div id="div-table">
+      <table id="table-entregas" class="table table-bordered">
+
+      </table>
+    </div>
+
+    <script src="script.js"></script>
   </div>
 </body>
 
